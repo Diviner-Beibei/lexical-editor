@@ -1,0 +1,12 @@
+.dropdown .divider {
+  width: auto;
+  background-color: #eee;
+  margin: 4px 8px;
+  height: 1px;
+}
+
+.toolbar .divider {
+  width: 1px;
+  background-color: #eee;
+  margin: 0 4px;
+}
