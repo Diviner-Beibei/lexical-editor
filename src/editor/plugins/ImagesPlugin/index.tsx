@@ -26,18 +26,18 @@ import {
   LexicalEditor,
 } from "lexical";
 import { useEffect, useRef, useState } from "react";
-import { CAN_USE_DOM } from "../shared/canUseDOM";
+import { CAN_USE_DOM } from "../../shared/canUseDOM";
 
 import {
   $createImageNode,
   $isImageNode,
   ImageNode,
   ImagePayload,
-} from "../nodes/ImageNode";
-import Button from "../ui/Button";
-import { DialogActions, DialogButtonsList } from "../ui/Dialog";
-import FileInput from "../ui/FileInput";
-import TextInput from "../ui/TextInput";
+} from "../../nodes/ImageNode";
+import Button from "../../ui/Button";
+import { DialogActions, DialogButtonsList } from "../../ui/Dialog";
+import FileInput from "../../ui/FileInput";
+import TextInput from "../../ui/TextInput";
 
 export type InsertImagePayload = Readonly<ImagePayload>;
 

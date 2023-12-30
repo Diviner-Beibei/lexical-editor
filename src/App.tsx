@@ -1,6 +1,7 @@
 import Editor from "./editor/Editor";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import theme from "./editor/themes/PlaygroundEditorTheme";
+import PlaygroundNodes from "./editor/nodes/PlaygroundNodes";
 
 function onError(error: Error) {
   console.error(error);
@@ -8,8 +9,9 @@ function onError(error: Error) {
 
 function App() {
   const initialConfig = {
-    namespace: "MyEditor",
+    namespace: "Playground",
     theme,
+    nodes: [...PlaygroundNodes],
     onError,
   };
 

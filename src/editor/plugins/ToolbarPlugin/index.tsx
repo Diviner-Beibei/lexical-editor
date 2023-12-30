@@ -1,4 +1,4 @@
-import { Dispatch, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, Dispatch } from "react"; //Dispatch
 import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
@@ -51,11 +51,11 @@ function ToolbarPlugin({
     fontColor,
     bgColor,
     elementFormat,
-    isLink,
     isBold,
     isItalic,
     isUnderline,
     isRTL,
+    isLink,
   } = useUpdateToolbar(activeEditor);
 
   useEffect(() => {
@@ -76,11 +76,12 @@ function ToolbarPlugin({
     $updateToolbar
   );
 
-  useToggleLinkEditModeCommand(activeEditor, isLink, setIsLinkEditMode);
+  useToggleLinkEditModeCommand(activeEditor, isLink, setIsLinkEditMode); //
   const { onFontColorSelect, onBgColorSelect } =
     useTextStyleHooks(activeEditor);
 
   const insertLink = useCallback(() => {
+    console.log("insertLink");
     if (!isLink) {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl("https://"));
     } else {

@@ -24,7 +24,7 @@ import { getSelectedNode } from "../utils/getSelectedNode";
 import {
   blockTypeToBlockName,
   rootTypeToRootName,
-} from "../plugins/Toolbar/common";
+} from "../plugins/ToolbarPlugin/common";
 import { mergeRegister } from "@lexical/utils";
 
 export function useUpdateToolbar(activeEditor: LexicalEditor) {
@@ -77,6 +77,9 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
+      // console.log("parent", parent);
+      // console.log("node", node);
+
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
       } else {

@@ -55,7 +55,7 @@ import LinkPlugin from "../plugins/LinkPlugin";
 // import TreeViewPlugin from "../plugins/TreeViewPlugin";
 import ContentEditable from "../ui/ContentEditable";
 import ImageResizer from "../ui/ImageResizer";
-import Placeholder from "../ui/Placeholder";
+// import Placeholder from "../ui/Placeholder";
 import { $isImageNode } from "./ImageNode";
 
 const imageCache = new Set();
@@ -120,8 +120,8 @@ export default function ImageComponent({
   resizable,
   showCaption,
   caption,
-  captionsEnabled,
-}: {
+}: // captionsEnabled,
+{
   altText: string;
   caption: LexicalEditor;
   height: "inherit" | number;
@@ -325,14 +325,14 @@ export default function ImageComponent({
     setSelected,
   ]);
 
-  const setShowCaption = () => {
-    editor.update(() => {
-      const node = $getNodeByKey(nodeKey);
-      if ($isImageNode(node)) {
-        node.setShowCaption(true);
-      }
-    });
-  };
+  // const setShowCaption = () => {
+  //   editor.update(() => {
+  //     const node = $getNodeByKey(nodeKey);
+  //     if ($isImageNode(node)) {
+  //       node.setShowCaption(true);
+  //     }
+  //   });
+  // };
 
   const onResizeEnd = (
     nextWidth: "inherit" | number,
@@ -403,11 +403,12 @@ export default function ImageComponent({
                 contentEditable={
                   <ContentEditable className="ImageNode__contentEditable" />
                 }
-                placeholder={
-                  <Placeholder className="ImageNode__placeholder">
-                    Enter a caption...
-                  </Placeholder>
-                }
+                placeholder={null}
+                // placeholder={
+                //   <Placeholder className="ImageNode__placeholder">
+                //     Enter a caption...
+                //   </Placeholder>
+                // }
                 ErrorBoundary={LexicalErrorBoundary}
               />
               {/* {showNestedEditorTreeView === true ? <TreeViewPlugin /> : null} */}
@@ -416,15 +417,15 @@ export default function ImageComponent({
         )}
         {resizable && $isNodeSelection(selection) && isFocused && (
           <ImageResizer
-            showCaption={showCaption}
-            setShowCaption={setShowCaption}
+            // showCaption={showCaption}
+            // setShowCaption={setShowCaption}
+            // captionsEnabled={captionsEnabled}
+            // buttonRef={buttonRef}
             editor={editor}
-            buttonRef={buttonRef}
             imageRef={imageRef}
             maxWidth={maxWidth}
             onResizeStart={onResizeStart}
             onResizeEnd={onResizeEnd}
-            captionsEnabled={captionsEnabled}
           />
         )}
       </>
