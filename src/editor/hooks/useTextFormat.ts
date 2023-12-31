@@ -7,7 +7,7 @@ import {
   LexicalEditor,
 } from "lexical";
 
-export function useTextStyleHooks(activeEditor: LexicalEditor) {
+export function useTextFormat(activeEditor: LexicalEditor) {
   const applyStyleText = useCallback(
     (styles: Record<string, string>) => {
       activeEditor.update(() => {

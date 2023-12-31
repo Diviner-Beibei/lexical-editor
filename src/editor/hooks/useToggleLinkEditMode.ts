@@ -4,7 +4,7 @@ import { sanitizeUrl } from "../utils/url";
 import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { LexicalEditor } from "lexical";
 
-export function useToggleLinkEditModeCommand(
+export function useToggleLinkEditMode(
   activeEditor: LexicalEditor,
   isLink: boolean,
   setIsLinkEditMode: Dispatch<boolean>
@@ -15,8 +15,6 @@ export function useToggleLinkEditModeCommand(
       (payload) => {
         const event: KeyboardEvent = payload;
         const { code, ctrlKey, metaKey } = event;
-
-        console.log("useToggleLinkEditModeCommand:", code, ctrlKey, metaKey);
 
         if (code === "KeyK" && (ctrlKey || metaKey)) {
           event.preventDefault();
@@ -35,5 +33,5 @@ export function useToggleLinkEditModeCommand(
       },
       COMMAND_PRIORITY_NORMAL
     );
-  }, [activeEditor, isLink, setIsLinkEditMode]); //
+  }, [activeEditor, isLink, setIsLinkEditMode]);
 }
