@@ -16,25 +16,17 @@ import {
   REMOVE_LIST_COMMAND,
 } from "@lexical/list";
 import DropDown, { DropDownItem } from "../../ui/DropDown";
-import {
-  blockTypeToBlockName,
-  rootTypeToRootName,
-  dropDownActiveClass,
-} from "./common";
+import { blockTypeToBlockName, dropDownActiveClass } from "./ToolbarPluginData";
 
 function BlockFormatDropDown({
   editor,
   blockType,
-  rootType,
   disabled = false,
 }: {
   blockType: keyof typeof blockTypeToBlockName;
-  rootType: keyof typeof rootTypeToRootName;
   editor: LexicalEditor;
   disabled?: boolean;
 }): JSX.Element {
-  console.log(rootType); //为了去掉ts-lint报错
-
   const formatParagraph = () => {
     editor.update(() => {
       const selection = $getSelection();

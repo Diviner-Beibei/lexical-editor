@@ -6,9 +6,9 @@ import {
   OUTDENT_CONTENT_COMMAND,
 } from "lexical";
 
+import { ELEMENT_FORMAT_OPTIONS } from "./ToolbarPluginData";
 import DropDown, { DropDownItem } from "../../ui/DropDown";
 import Divider from "../../ui/Divider";
-import { ELEMENT_FORMAT_OPTIONS } from "./common";
 
 function ElementFormatDropdown({
   editor,

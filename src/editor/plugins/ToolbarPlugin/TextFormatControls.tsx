@@ -1,7 +1,7 @@
-// import { useCallback } from "react";
-// import { TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { useCallback } from "react";
+import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { FORMAT_TEXT_COMMAND, LexicalEditor } from "lexical";
-// import { sanitizeUrl } from "../../utils/url";
+import { sanitizeUrl } from "../../utils/url";
 
 interface TextFormatControlsProps {
   isEditable: boolean;
@@ -11,7 +11,7 @@ interface TextFormatControlsProps {
   isUnderline: boolean;
   isLink: boolean;
   activeEditor: LexicalEditor;
-  insertLink: () => void;
+  editor: LexicalEditor;
 }
 
 function TextFormatControls({
@@ -22,8 +22,17 @@ function TextFormatControls({
   isUnderline,
   isLink,
   activeEditor,
-  insertLink,
+  editor,
 }: TextFormatControlsProps) {
+  const insertLink = useCallback(() => {
+    console.log("insertLink");
+    if (!isLink) {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl("https://"));
+    } else {
+      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
+    }
+  }, [editor, isLink]);
+
   return (
     <>
       <button

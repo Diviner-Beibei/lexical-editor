@@ -17,21 +17,15 @@ import {
   $getSelectionStyleValueForProperty,
   $isParentElementRTL,
 } from "@lexical/selection";
-import { $isTableNode } from "@lexical/table";
 import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
 
 import { getSelectedNode } from "../utils/getSelectedNode";
-import {
-  blockTypeToBlockName,
-  rootTypeToRootName,
-} from "../plugins/ToolbarPlugin/common";
+import { blockTypeToBlockName } from "../plugins/ToolbarPlugin/ToolbarPluginData";
 import { mergeRegister } from "@lexical/utils";
 
 export function useUpdateToolbar(activeEditor: LexicalEditor) {
   const [blockType, setBlockType] =
     useState<keyof typeof blockTypeToBlockName>("paragraph");
-  const [rootType, setRootType] =
-    useState<keyof typeof rootTypeToRootName>("root");
   const [fontColor, setFontColor] = useState<string>("#000");
   const [bgColor, setBgColor] = useState<string>("#fff");
   const [elementFormat, setElementFormat] = useState<ElementFormatType>("left");
@@ -77,20 +71,11 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
-      // console.log("parent", parent);
-      // console.log("node", node);
 
       if ($isLinkNode(parent) || $isLinkNode(node)) {
         setIsLink(true);
       } else {
         setIsLink(false);
-      }
-
-      const tableNode = $findMatchingParent(node, $isTableNode);
-      if ($isTableNode(tableNode)) {
-        setRootType("table");
-      } else {
-        setRootType("root");
       }
 
       if (elementDOM !== null) {
@@ -146,7 +131,6 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
   return {
     $updateToolbar,
     blockType,
-    rootType,
     fontColor,
     bgColor,
     elementFormat,
