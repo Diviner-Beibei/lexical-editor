@@ -9,6 +9,7 @@ import {
   CAN_REDO_COMMAND,
   CAN_UNDO_COMMAND,
   COMMAND_PRIORITY_CRITICAL,
+  ElementNode,
 } from "lexical";
 import { $isLinkNode } from "@lexical/link";
 import { $isListNode, ListNode } from "@lexical/list";
@@ -23,6 +24,43 @@ import { getSelectedNode } from "../utils/getSelectedNode";
 import { blockTypeToBlockName } from "../plugins/ToolbarPlugin/ToolbarPluginData";
 import { mergeRegister } from "@lexical/utils";
 
+function getRootOrShadowRoot(anchorNode: ElementNode) {
+  if (anchorNode.getKey() === "root") {
+    return anchorNode;
+  }
+
+  return $findMatchingParent(anchorNode, (e) => {
+    const parent = e.getParent();
+    return parent !== null && $isRootOrShadowRoot(parent);
+  });
+}
+
+type blockType = keyof typeof blockTypeToBlockName;
+
+function setBlockTypeIfElementExists(
+  anchorNode: ElementNode,
+  element: ElementNode | null,
+  elementDOM: HTMLElement | null,
+  setBlockType: (type: blockType) => void
+) {
+  if (elementDOM === null) return;
+
+  if ($isListNode(element)) {
+    const parentList = $getNearestNodeOfType<ListNode>(anchorNode, ListNode);
+    const type: blockType = parentList
+      ? parentList.getListType()
+      : element.getListType();
+    setBlockType(type);
+  } else {
+    const type = $isHeadingNode(element)
+      ? element.getTag()
+      : (element as ElementNode).getType();
+    if (type in blockTypeToBlockName) {
+      setBlockType(type as blockType);
+    }
+  }
+}
+
 export function useUpdateToolbar(activeEditor: LexicalEditor) {
   const [blockType, setBlockType] =
     useState<keyof typeof blockTypeToBlockName>("paragraph");
@@ -33,39 +71,25 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
-  const [isStrikethrough, setIsStrikethrough] = useState(false);
-  const [isSubscript, setIsSubscript] = useState(false);
-  const [isSuperscript, setIsSuperscript] = useState(false);
-  const [isCode, setIsCode] = useState(false);
   const [isRTL, setIsRTL] = useState(false);
 
   const $updateToolbar = useCallback(() => {
     const selection = $getSelection();
     if ($isRangeSelection(selection)) {
       const anchorNode = selection.anchor.getNode();
-      let element =
-        anchorNode.getKey() === "root"
-          ? anchorNode
-          : $findMatchingParent(anchorNode, (e) => {
-              const parent = e.getParent();
-              return parent !== null && $isRootOrShadowRoot(parent);
-            });
+      let element = getRootOrShadowRoot(anchorNode);
 
       if (element === null) {
         element = anchorNode.getTopLevelElementOrThrow();
       }
 
-      const elementKey = element.getKey();
+      const elementKey = (element as ElementNode).getKey();
       const elementDOM = activeEditor.getElementByKey(elementKey);
 
       // Update text format
       setIsBold(selection.hasFormat("bold"));
       setIsItalic(selection.hasFormat("italic"));
       setIsUnderline(selection.hasFormat("underline"));
-      setIsStrikethrough(selection.hasFormat("strikethrough"));
-      setIsSubscript(selection.hasFormat("subscript"));
-      setIsSuperscript(selection.hasFormat("superscript"));
-      setIsCode(selection.hasFormat("code"));
       setIsRTL($isParentElementRTL(selection));
 
       // Update links
@@ -78,25 +102,13 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
         setIsLink(false);
       }
 
-      if (elementDOM !== null) {
-        if ($isListNode(element)) {
-          const parentList = $getNearestNodeOfType<ListNode>(
-            anchorNode,
-            ListNode
-          );
-          const type = parentList
-            ? parentList.getListType()
-            : element.getListType();
-          setBlockType(type);
-        } else {
-          const type = $isHeadingNode(element)
-            ? element.getTag()
-            : element.getType();
-          if (type in blockTypeToBlockName) {
-            setBlockType(type as keyof typeof blockTypeToBlockName);
-          }
-        }
-      }
+      setBlockTypeIfElementExists(
+        anchorNode,
+        element as ElementNode,
+        elementDOM,
+        setBlockType
+      );
+
       // Handle buttons
       setFontColor(
         $getSelectionStyleValueForProperty(selection, "color", "#000")
@@ -138,10 +150,10 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
     isBold,
     isItalic,
     isUnderline,
-    isStrikethrough,
-    isSubscript,
-    isSuperscript,
-    isCode,
+    // isStrikethrough,
+    // isSubscript,
+    // isSuperscript,
+    // isCode,
     isRTL,
   };
 }
