@@ -3,12 +3,10 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 
 import { COMMAND_PRIORITY_CRITICAL, SELECTION_CHANGE_COMMAND } from "lexical";
 import { IS_APPLE } from "../../shared/environment";
-import { useToggleLinkEditMode } from "../../hooks/useToggleLinkEditMode";
-import {
-  useUpdateToolbar,
-  useEditorToolbarState,
-} from "../../hooks/useToolbarStateHooks";
-import { useTextFormat } from "../../hooks/useTextFormat";
+import { useToggleLinkEditMode } from "../../hooks/ToolbarPlugin/useToggleLinkEditMode";
+import { useUpdateToolbar } from "../../hooks/ToolbarPlugin/useToolbarState";
+import { useDoRegister } from "../../hooks/ToolbarPlugin/useDoRegister";
+import { useTextFormat } from "../../hooks/ToolbarPlugin/useTextFormat";
 import DropdownColorPicker from "../../ui/DropdownColorPicker";
 import UndoRedoComponent from "./UndoRedoComponent";
 import TextFormatControls from "./TextFormatControls";
@@ -24,6 +22,7 @@ function ToolbarPlugin({
 }): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
+  const [isEditable, setIsEditable] = useState(() => editor.isEditable());
 
   const {
     $updateToolbar,
@@ -50,10 +49,11 @@ function ToolbarPlugin({
     );
   }, [editor, $updateToolbar]);
 
-  const { canUndo, canRedo, isEditable } = useEditorToolbarState(
+  const { canUndo, canRedo } = useDoRegister(
     editor,
     activeEditor,
-    $updateToolbar
+    $updateToolbar,
+    setIsEditable
   );
 
   useToggleLinkEditMode(activeEditor, isLink, setIsLinkEditMode); //

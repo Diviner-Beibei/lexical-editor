@@ -1,6 +1,6 @@
 import { useEffect, Dispatch } from "react"; //Dispatch
 import { COMMAND_PRIORITY_NORMAL, KEY_MODIFIER_COMMAND } from "lexical";
-import { sanitizeUrl } from "../utils/url";
+import { sanitizeUrl } from "../../utils/url";
 import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { LexicalEditor } from "lexical";
 

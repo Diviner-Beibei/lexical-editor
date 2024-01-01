@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   LexicalEditor,
   ElementFormatType,
@@ -6,9 +6,6 @@ import {
   $isRangeSelection,
   $isRootOrShadowRoot,
   $getSelection,
-  CAN_REDO_COMMAND,
-  CAN_UNDO_COMMAND,
-  COMMAND_PRIORITY_CRITICAL,
   ElementNode,
 } from "lexical";
 import { $isLinkNode } from "@lexical/link";
@@ -18,14 +15,10 @@ import {
   $getSelectionStyleValueForProperty,
   $isParentElementRTL,
 } from "@lexical/selection";
-import {
-  $findMatchingParent,
-  $getNearestNodeOfType,
-  mergeRegister,
-} from "@lexical/utils";
+import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
 
-import { getSelectedNode } from "../utils/getSelectedNode";
-import { blockTypeToBlockName } from "../plugins/ToolbarPlugin/ToolbarPluginData";
+import { getSelectedNode } from "../../utils/getSelectedNode";
+import { blockTypeToBlockName } from "../../plugins/ToolbarPlugin/ToolbarPluginData";
 
 function getRootOrShadowRoot(anchorNode: ElementNode) {
   if (anchorNode.getKey() === "root") {
@@ -154,52 +147,4 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
     isUnderline,
     isRTL,
   };
-}
-
-export function useEditorToolbarState(
-  editor: LexicalEditor,
-  activeEditor: LexicalEditor,
-  $updateToolbar: () => void
-) {
-  const [canUndo, setCanUndo] = useState(false);
-  const [canRedo, setCanRedo] = useState(false);
-  const [isEditable, setIsEditable] = useState(() => editor.isEditable());
-
-  useEffect(() => {
-    return mergeRegister(
-      editor.registerEditableListener((editable) => {
-        setIsEditable(editable);
-      }),
-      activeEditor.registerUpdateListener(({ editorState }) => {
-        editorState.read(() => {
-          $updateToolbar();
-        });
-      }),
-      activeEditor.registerCommand<boolean>(
-        CAN_UNDO_COMMAND,
-        (payload) => {
-          setCanUndo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
-      ),
-      activeEditor.registerCommand<boolean>(
-        CAN_REDO_COMMAND,
-        (payload) => {
-          setCanRedo(payload);
-          return false;
-        },
-        COMMAND_PRIORITY_CRITICAL
-      )
-    );
-  }, [
-    $updateToolbar,
-    activeEditor,
-    editor,
-    setIsEditable,
-    setCanUndo,
-    setCanRedo,
-  ]);
-
-  return { canUndo, canRedo, isEditable };
 }

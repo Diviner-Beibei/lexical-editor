@@ -6,7 +6,6 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-// import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
@@ -86,7 +85,6 @@ function Editor() {
               isLinkEditMode={isLinkEditMode}
               setIsLinkEditMode={setIsLinkEditMode}
             />
-            {/* <FloatingTextFormatToolbarPlugin anchorElem={floatingAnchorElem} /> */}
           </>
         )}
       </div>

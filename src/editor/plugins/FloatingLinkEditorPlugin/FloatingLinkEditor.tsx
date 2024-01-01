@@ -56,14 +56,14 @@ function FloatingLinkEditor({
       }
     }
     const editorElem = editorRef.current;
-    const nativeSelection = window.getSelection();
-    const activeElement = document.activeElement;
 
     if (editorElem === null) {
       return;
     }
 
     const rootElement = editor.getRootElement();
+    const nativeSelection = window.getSelection();
+    const activeElement = document.activeElement;
 
     if (
       selection !== null &&
@@ -86,8 +86,6 @@ function FloatingLinkEditor({
       setLastSelection(null);
       setIsLinkEditMode(true);
       setLinkUrl("");
-
-      console.log("updateLinkEditor: ", activeElement, isLinkEditMode);
     }
 
     return true;
@@ -180,8 +178,6 @@ function FloatingLinkEditor({
       setIsLinkEditMode(false);
     }
   };
-
-  // console.log("FloatingLinkEditor: ", isLinkEditMode);
 
   return (
     <div ref={editorRef} className="link-editor">
