@@ -18,11 +18,14 @@ import {
   $getSelectionStyleValueForProperty,
   $isParentElementRTL,
 } from "@lexical/selection";
-import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
+import {
+  $findMatchingParent,
+  $getNearestNodeOfType,
+  mergeRegister,
+} from "@lexical/utils";
 
 import { getSelectedNode } from "../utils/getSelectedNode";
 import { blockTypeToBlockName } from "../plugins/ToolbarPlugin/ToolbarPluginData";
-import { mergeRegister } from "@lexical/utils";
 
 function getRootOrShadowRoot(anchorNode: ElementNode) {
   if (anchorNode.getKey() === "root") {
@@ -62,8 +65,7 @@ function setBlockTypeIfElementExists(
 }
 
 export function useUpdateToolbar(activeEditor: LexicalEditor) {
-  const [blockType, setBlockType] =
-    useState<keyof typeof blockTypeToBlockName>("paragraph");
+  const [blockType, setBlockType] = useState<blockType>("paragraph");
   const [fontColor, setFontColor] = useState<string>("#000");
   const [bgColor, setBgColor] = useState<string>("#fff");
   const [elementFormat, setElementFormat] = useState<ElementFormatType>("left");
@@ -150,10 +152,6 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
     isBold,
     isItalic,
     isUnderline,
-    // isStrikethrough,
-    // isSubscript,
-    // isSuperscript,
-    // isCode,
     isRTL,
   };
 }

@@ -4,15 +4,15 @@ import { EditorState } from "lexical"; //$getRoot, $getSelection,
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+// import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import LinkPlugin from "./plugins/LinkPlugin";
 import ImagesPlugin from "./plugins/ImagesPlugin";
 import FloatingLinkEditorPlugin from "./plugins/FloatingLinkEditorPlugin";
-// import FloatingTextFormatToolbarPlugin from "./plugins/FloatingTextFormatToolbarPlugin";
-// import MaxLengthPlugin from "./plugins/MaxLengthPlugin";
 import Placeholder from "./ui/Placeholder";
 import ContentEditable from "./ui/ContentEditable";
 import { CAN_USE_DOM } from "./shared/canUseDOM";
@@ -24,17 +24,6 @@ function onChange(editorState: EditorState) {
     // const selection = $getSelection();
     // console.log("onChange: ", root, selection);
   });
-}
-
-function MyCustomAutoFocusPlugin() {
-  const [editor] = useLexicalComposerContext();
-
-  useEffect(() => {
-    // Focus the editor when the effect fires!
-    editor.focus();
-  }, [editor]);
-
-  return null;
 }
 
 function Editor() {
@@ -89,7 +78,7 @@ function Editor() {
         <ListPlugin />
         <LinkPlugin />
         <ImagesPlugin />
-        <MyCustomAutoFocusPlugin />
+        <AutoFocusPlugin />
         {floatingAnchorElem && !isSmallWidthViewport && (
           <>
             <FloatingLinkEditorPlugin
