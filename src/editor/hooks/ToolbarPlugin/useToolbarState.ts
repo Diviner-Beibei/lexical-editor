@@ -7,6 +7,7 @@ import {
   $isRootOrShadowRoot,
   $getSelection,
   ElementNode,
+  TextNode,
 } from "lexical";
 import { $isLinkNode } from "@lexical/link";
 import { $isListNode, ListNode } from "@lexical/list";
@@ -20,7 +21,7 @@ import { $findMatchingParent, $getNearestNodeOfType } from "@lexical/utils";
 import { getSelectedNode } from "../../utils/getSelectedNode";
 import { blockTypeToBlockName } from "../../plugins/ToolbarPlugin/ToolbarPluginData";
 
-function getRootOrShadowRoot(anchorNode: ElementNode) {
+function getRootOrShadowRoot(anchorNode: ElementNode | TextNode) {
   if (anchorNode.getKey() === "root") {
     return anchorNode;
   }
@@ -34,7 +35,7 @@ function getRootOrShadowRoot(anchorNode: ElementNode) {
 type blockType = keyof typeof blockTypeToBlockName;
 
 function setBlockTypeIfElementExists(
-  anchorNode: ElementNode,
+  anchorNode: ElementNode | TextNode,
   element: ElementNode | null,
   elementDOM: HTMLElement | null,
   setBlockType: (type: blockType) => void

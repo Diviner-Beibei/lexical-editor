@@ -306,15 +306,6 @@ export default function ImageComponent({
     setSelected,
   ]);
 
-  // const setShowCaption = () => {
-  //   editor.update(() => {
-  //     const node = $getNodeByKey(nodeKey);
-  //     if ($isImageNode(node)) {
-  //       node.setShowCaption(true);
-  //     }
-  //   });
-  // };
-
   const onResizeEnd = (
     nextWidth: "inherit" | number,
     nextHeight: "inherit" | number
@@ -359,10 +350,6 @@ export default function ImageComponent({
 
         {resizable && $isNodeSelection(selection) && isFocused && (
           <ImageResizer
-            // showCaption={showCaption}
-            // setShowCaption={setShowCaption}
-            // captionsEnabled={captionsEnabled}
-            // buttonRef={buttonRef}
             editor={editor}
             imageRef={imageRef}
             maxWidth={maxWidth}

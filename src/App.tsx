@@ -1,7 +1,8 @@
-import Editor from "./editor/Editor";
+import "./index.css";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import theme from "./editor/themes/PlaygroundEditorTheme";
 import PlaygroundNodes from "./editor/nodes/PlaygroundNodes";
+import Editor from "./editor/Editor";
 
 function onError(error: Error) {
   console.error(error);
