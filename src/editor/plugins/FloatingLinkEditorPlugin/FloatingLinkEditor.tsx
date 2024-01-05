@@ -14,21 +14,18 @@ import { Dispatch, useCallback, useEffect, useRef, useState } from "react";
 import { setFloatingElemPositionForLinkEditor } from "../../utils/setFloatingElemPositionForLinkEditor";
 import { sanitizeUrl } from "../../utils/url";
 import { getSelectedNode } from "../../utils/getSelectedNode";
+import { useEditorContext } from "../../context/EditorContext";
 
 function FloatingLinkEditor({
   editor,
   isLink,
   setIsLink,
   anchorElem,
-  isLinkEditMode,
-  setIsLinkEditMode,
 }: {
   editor: LexicalEditor;
   isLink: boolean;
   setIsLink: Dispatch<boolean>;
   anchorElem: HTMLElement;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,6 +34,8 @@ function FloatingLinkEditor({
   const [lastSelection, setLastSelection] = useState<BaseSelection | null>(
     null
   );
+
+  const { getIsLinkEditMode, setIsLinkEditMode } = useEditorContext();
 
   const updateLinkEditor = useCallback(() => {
     const selection = $getSelection();
@@ -51,7 +50,7 @@ function FloatingLinkEditor({
       } else {
         setLinkUrl("");
       }
-      if (isLinkEditMode) {
+      if (getIsLinkEditMode()) {
         setEditedLinkUrl("https://");
       }
     }
@@ -89,7 +88,7 @@ function FloatingLinkEditor({
     }
 
     return true;
-  }, [anchorElem, editor, setIsLinkEditMode, isLinkEditMode]);
+  }, [anchorElem, editor, getIsLinkEditMode, setIsLinkEditMode]);
 
   useEffect(() => {
     const scrollerElem = anchorElem.parentElement;
@@ -152,10 +151,10 @@ function FloatingLinkEditor({
   }, [editor, updateLinkEditor]);
 
   useEffect(() => {
-    if (isLinkEditMode && inputRef.current) {
+    if (getIsLinkEditMode() && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isLinkEditMode, isLink]);
+  }, [getIsLinkEditMode, isLink]);
 
   const monitorInputInteraction = (
     event: React.KeyboardEvent<HTMLInputElement>
@@ -181,7 +180,7 @@ function FloatingLinkEditor({
 
   return (
     <div ref={editorRef} className="link-editor">
-      {!isLink ? null : isLinkEditMode ? (
+      {!isLink ? null : getIsLinkEditMode() ? (
         <>
           <input
             ref={inputRef}

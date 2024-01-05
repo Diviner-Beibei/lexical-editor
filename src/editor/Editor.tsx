@@ -27,7 +27,7 @@ function onChange(editorState: EditorState) {
 
 function Editor() {
   const placeholder = <Placeholder>{"Enter some rich text..."}</Placeholder>;
-  const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
+  // const [isLinkEditMode, setIsLinkEditMode] = useState<boolean>(false);
 
   const [floatingAnchorElem, setFloatingAnchorElem] =
     useState<HTMLDivElement | null>(null);
@@ -59,7 +59,7 @@ function Editor() {
 
   return (
     <>
-      <ToolbarPlugin setIsLinkEditMode={setIsLinkEditMode} />
+      <ToolbarPlugin />
       <div className="editor-container">
         <RichTextPlugin
           contentEditable={
@@ -80,11 +80,7 @@ function Editor() {
         <AutoFocusPlugin />
         {floatingAnchorElem && !isSmallWidthViewport && (
           <>
-            <FloatingLinkEditorPlugin
-              anchorElem={floatingAnchorElem}
-              isLinkEditMode={isLinkEditMode}
-              setIsLinkEditMode={setIsLinkEditMode}
-            />
+            <FloatingLinkEditorPlugin anchorElem={floatingAnchorElem} />
           </>
         )}
       </div>

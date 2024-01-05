@@ -1,14 +1,16 @@
-import { useEffect, Dispatch } from "react"; //Dispatch
+import { useEffect } from "react"; //Dispatch
 import { COMMAND_PRIORITY_NORMAL, KEY_MODIFIER_COMMAND } from "lexical";
 import { sanitizeUrl } from "../../utils/url";
 import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { LexicalEditor } from "lexical";
+import { useEditorContext } from "../../context/EditorContext";
 
 export function useToggleLinkEditMode(
   activeEditor: LexicalEditor,
-  isLink: boolean,
-  setIsLinkEditMode: Dispatch<boolean>
+  isLink: boolean
 ) {
+  const { setIsLinkEditMode } = useEditorContext();
+
   useEffect(() => {
     return activeEditor.registerCommand(
       KEY_MODIFIER_COMMAND,

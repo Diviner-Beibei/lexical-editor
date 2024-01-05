@@ -7,18 +7,7 @@
  */
 import "./index.css";
 
-// import { $isAutoLinkNode, $isLinkNode } from "@lexical/link";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-// import { $findMatchingParent, mergeRegister } from "@lexical/utils";
-// import {
-//   $getSelection,
-//   $isRangeSelection,
-//   CLICK_COMMAND,
-//   COMMAND_PRIORITY_CRITICAL,
-//   COMMAND_PRIORITY_LOW,
-//   SELECTION_CHANGE_COMMAND,
-// } from "lexical";
-import { Dispatch } from "react";
 import { createPortal } from "react-dom";
 
 import FloatingLinkEditor from "./FloatingLinkEditor";
@@ -26,12 +15,8 @@ import { useFloatingLinkEditorPlugin } from "./useFloatingLinkEditorPlugin";
 
 function FloatingLinkEditorPlugin({
   anchorElem = document.body,
-  isLinkEditMode,
-  setIsLinkEditMode,
 }: {
   anchorElem?: HTMLElement;
-  isLinkEditMode: boolean;
-  setIsLinkEditMode: Dispatch<boolean>;
 }): JSX.Element | null {
   const [editor] = useLexicalComposerContext();
 
@@ -44,8 +29,6 @@ function FloatingLinkEditorPlugin({
       isLink={isLink}
       setIsLink={setIsLink}
       anchorElem={anchorElem}
-      isLinkEditMode={isLinkEditMode}
-      setIsLinkEditMode={setIsLinkEditMode}
     />,
     anchorElem
   );

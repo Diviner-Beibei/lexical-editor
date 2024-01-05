@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch } from "react";
+import { useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 import { COMMAND_PRIORITY_CRITICAL, SELECTION_CHANGE_COMMAND } from "lexical";
@@ -15,11 +15,7 @@ import BlockFormatDropDown from "./BlockFormatDropDown";
 import ElementFormatDropdown from "./ElementFormatDropdown";
 import Divider from "../../ui/Divider";
 
-function ToolbarPlugin({
-  setIsLinkEditMode,
-}: {
-  setIsLinkEditMode: Dispatch<boolean>;
-}): JSX.Element {
+function ToolbarPlugin(): JSX.Element {
   const [editor] = useLexicalComposerContext();
   const [activeEditor, setActiveEditor] = useState(editor);
   const [isEditable, setIsEditable] = useState(() => editor.isEditable());
@@ -56,7 +52,7 @@ function ToolbarPlugin({
     setIsEditable
   );
 
-  useToggleLinkEditMode(activeEditor, isLink, setIsLinkEditMode); //
+  useToggleLinkEditMode(activeEditor, isLink); //
   const { onFontColorSelect, onBgColorSelect } = useTextFormat(activeEditor);
 
   return (
