@@ -1,9 +1,9 @@
+import "./index.css";
 import { useEffect, useState } from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 import { COMMAND_PRIORITY_CRITICAL, SELECTION_CHANGE_COMMAND } from "lexical";
 import { IS_APPLE } from "../../shared/environment";
-import { useToggleLinkEditMode } from "../../hooks/ToolbarPlugin/useToggleLinkEditMode";
 import { useUpdateToolbar } from "../../hooks/ToolbarPlugin/useToolbarState";
 import { useDoRegister } from "../../hooks/ToolbarPlugin/useDoRegister";
 import { useTextFormat } from "../../hooks/ToolbarPlugin/useTextFormat";
@@ -30,7 +30,6 @@ function ToolbarPlugin(): JSX.Element {
     isItalic,
     isUnderline,
     isRTL,
-    isLink,
   } = useUpdateToolbar(activeEditor);
 
   useEffect(() => {
@@ -52,7 +51,6 @@ function ToolbarPlugin(): JSX.Element {
     setIsEditable
   );
 
-  useToggleLinkEditMode(activeEditor, isLink); //
   const { onFontColorSelect, onBgColorSelect } = useTextFormat(activeEditor);
 
   return (
@@ -80,7 +78,6 @@ function ToolbarPlugin(): JSX.Element {
         isBold={isBold}
         isItalic={isItalic}
         isUnderline={isUnderline}
-        isLink={isLink}
       />
       <DropdownColorPicker
         disabled={!isEditable}

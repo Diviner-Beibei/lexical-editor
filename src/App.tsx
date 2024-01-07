@@ -1,7 +1,7 @@
 import "./index.css";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
-import theme from "./editor/themes/PlaygroundEditorTheme";
-import PlaygroundNodes from "./editor/nodes/PlaygroundNodes";
+import theme from "./editor/themes/EditorTheme";
+import BeibeiNodes from "./editor/nodes/BeibeiNodes";
 import Editor from "./editor/Editor";
 import { EditorProvider } from "./editor/context/EditorContext";
 
@@ -11,20 +11,20 @@ function onError(error: Error) {
 
 function App() {
   const initialConfig = {
-    namespace: "Playground",
+    namespace: "Beibei",
     theme,
-    nodes: [...PlaygroundNodes],
+    nodes: [...BeibeiNodes],
     onError,
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <div className="editor-shell">
-        <EditorProvider>
+    <EditorProvider>
+      <LexicalComposer initialConfig={initialConfig}>
+        <div className="editor-shell">
           <Editor />
-        </EditorProvider>
-      </div>
-    </LexicalComposer>
+        </div>
+      </LexicalComposer>
+    </EditorProvider>
   );
 }
 

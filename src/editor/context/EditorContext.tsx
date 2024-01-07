@@ -2,7 +2,7 @@ import { createContext, useReducer, useContext } from "react";
 
 type ContextShape = {
   setIsLinkEditMode: (isLinkEditMode: boolean) => void;
-  getIsLinkEditMode: () => boolean;
+  isLinkEditMode: boolean;
 };
 interface StateProps {
   isLinkEditMode: boolean;
@@ -39,12 +39,8 @@ export function EditorProvider({ children }: EditorProviderProps) {
     dispatch({ type: "setIsLinkEditMode", payload: isLinkEditMode });
   }
 
-  function getIsLinkEditMode() {
-    return isLinkEditMode;
-  }
-
   return (
-    <EditorContext.Provider value={{ setIsLinkEditMode, getIsLinkEditMode }}>
+    <EditorContext.Provider value={{ setIsLinkEditMode, isLinkEditMode }}>
       {children}
     </EditorContext.Provider>
   );

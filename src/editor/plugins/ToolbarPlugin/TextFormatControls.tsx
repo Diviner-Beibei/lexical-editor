@@ -1,7 +1,4 @@
-import { useCallback } from "react";
-import { TOGGLE_LINK_COMMAND } from "@lexical/link";
 import { FORMAT_TEXT_COMMAND, LexicalEditor } from "lexical";
-import { sanitizeUrl } from "../../utils/url";
 
 interface TextFormatControlsProps {
   isEditable: boolean;
@@ -9,7 +6,6 @@ interface TextFormatControlsProps {
   isBold: boolean;
   isItalic: boolean;
   isUnderline: boolean;
-  isLink: boolean;
   activeEditor: LexicalEditor;
   editor: LexicalEditor;
 }
@@ -20,19 +16,8 @@ function TextFormatControls({
   isBold,
   isItalic,
   isUnderline,
-  isLink,
   activeEditor,
-  editor,
 }: TextFormatControlsProps) {
-  const insertLink = useCallback(() => {
-    console.log("insertLink");
-    if (!isLink) {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, sanitizeUrl("https://"));
-    } else {
-      editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
-    }
-  }, [editor, isLink]);
-
   return (
     <>
       <button
@@ -76,16 +61,6 @@ function TextFormatControls({
         }`}
       >
         <i className="format underline" />
-      </button>
-      <button
-        disabled={!isEditable}
-        onClick={insertLink}
-        className={"toolbar-item spaced " + (isLink ? "active" : "")}
-        aria-label="Insert link"
-        title="Insert link"
-        type="button"
-      >
-        <i className="format link" />
       </button>
     </>
   );

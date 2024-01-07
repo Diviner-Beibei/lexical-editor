@@ -63,7 +63,6 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
   const [fontColor, setFontColor] = useState<string>("#000");
   const [bgColor, setBgColor] = useState<string>("#fff");
   const [elementFormat, setElementFormat] = useState<ElementFormatType>("left");
-  const [isLink, setIsLink] = useState(false);
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
@@ -91,12 +90,6 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
-
-      if ($isLinkNode(parent) || $isLinkNode(node)) {
-        setIsLink(true);
-      } else {
-        setIsLink(false);
-      }
 
       setBlockTypeIfElementExists(
         anchorNode,
@@ -142,7 +135,6 @@ export function useUpdateToolbar(activeEditor: LexicalEditor) {
     fontColor,
     bgColor,
     elementFormat,
-    isLink,
     isBold,
     isItalic,
     isUnderline,
