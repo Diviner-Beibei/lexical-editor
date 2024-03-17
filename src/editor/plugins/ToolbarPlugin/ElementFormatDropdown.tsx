@@ -40,7 +40,8 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className="icon left-align" />
-        <span className="text">Left Align</span>
+        {/* Left Align */}
+        <span className="text">左对齐</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -49,7 +50,7 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className="icon center-align" />
-        <span className="text">Center Align</span>
+        <span className="text">居中对齐</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -58,7 +59,7 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className="icon right-align" />
-        <span className="text">Right Align</span>
+        <span className="text">右对齐</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -67,7 +68,7 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className="icon justify-align" />
-        <span className="text">Justify Align</span>
+        <span className="text">两端对齐</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -82,7 +83,7 @@ function ElementFormatDropdown({
               : ELEMENT_FORMAT_OPTIONS.start.icon
           }`}
         />
-        <span className="text">Start Align</span>
+        <span className="text">开始对齐</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -97,7 +98,7 @@ function ElementFormatDropdown({
               : ELEMENT_FORMAT_OPTIONS.end.icon
           }`}
         />
-        <span className="text">End Align</span>
+        <span className="text">结尾对齐</span>
       </DropDownItem>
       <Divider />
       <DropDownItem
@@ -107,7 +108,7 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className={"icon " + (isRTL ? "indent" : "outdent")} />
-        <span className="text">Outdent</span>
+        <span className="text">减少缩进</span>
       </DropDownItem>
       <DropDownItem
         onClick={() => {
@@ -116,7 +117,7 @@ function ElementFormatDropdown({
         className="item"
       >
         <i className={"icon " + (isRTL ? "outdent" : "indent")} />
-        <span className="text">Indent</span>
+        <span className="text">缩进</span>
       </DropDownItem>
     </DropDown>
   );

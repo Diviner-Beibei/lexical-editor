@@ -26,6 +26,7 @@ import {
   LexicalEditor,
 } from "lexical";
 import { useEffect, useRef, useState } from "react";
+import imageCompression from "browser-image-compression";
 import { CAN_USE_DOM } from "../../shared/canUseDOM";
 
 import {
@@ -96,29 +97,52 @@ export function InsertImageUploadedDialogBody({
 
   const isDisabled = src === "";
 
-  const loadImage = (files: FileList | null) => {
-    const reader = new FileReader();
-    reader.onload = function () {
-      if (typeof reader.result === "string") {
-        setSrc(reader.result);
-      }
-      return "";
-    };
+  // const loadImage = (files: FileList | null) => {
+  //   const reader = new FileReader();
+  //   reader.onload = function () {
+  //     if (typeof reader.result === "string") {
+  //       setSrc(reader.result);
+  //     }
+  //     return "";
+  //   };
+  //   if (files !== null) {
+  //     reader.readAsDataURL(files[0]);
+  //   }
+  // };
+  const loadImage = async (files: FileList | null) => {
     if (files !== null) {
-      reader.readAsDataURL(files[0]);
+      const imageFile = files[0];
+      const options = {
+        maxSizeMB: 0.1,
+        maxWidthOrHeight: 720,
+        useWebWorker: true,
+        initialQuality: 0.5,
+      };
+      try {
+        const compressedFile = await imageCompression(imageFile, options);
+        const reader = new FileReader();
+        reader.onload = function () {
+          if (typeof reader.result === "string") {
+            setSrc(reader.result);
+          }
+        };
+        reader.readAsDataURL(compressedFile);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   return (
     <>
       <FileInput
-        label="Image Upload"
+        label="图片上传"
         onChange={loadImage}
         accept="image/*"
         data-test-id="image-modal-file-upload"
       />
       <TextInput
-        label="Alt Text"
+        label="替代文本"
         placeholder="Descriptive alternative text"
         onChange={setAltText}
         value={altText}
@@ -167,25 +191,6 @@ export function InsertImageDialog({
     <>
       {!mode && (
         <DialogButtonsList>
-          <Button
-            data-test-id="image-modal-option-sample"
-            onClick={() =>
-              onClick(
-                hasModifier.current
-                  ? {
-                      altText:
-                        "Daylight fir trees forest glacier green high ice landscape",
-                      src: "/images/landscape.jpg",
-                    }
-                  : {
-                      altText: "Yellow flower in tilt shift lens",
-                      src: "/images/yellow-flower.jpg",
-                    }
-              )
-            }
-          >
-            Sample
-          </Button>
           <Button
             data-test-id="image-modal-option-url"
             onClick={() => setMode("url")}

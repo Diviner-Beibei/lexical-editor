@@ -4,28 +4,36 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
-
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import ToolbarPlugin from "./plugins/ToolbarPlugin";
 import ImagesPlugin from "./plugins/ImagesPlugin";
 import Placeholder from "./ui/Placeholder";
 import ContentEditable from "./ui/ContentEditable";
 
-function onChange(editorState: EditorState) {
-  editorState.read(() => {
-    // Read the contents of the EditorState here.
-    // const root = $getRoot();
-    // const selection = $getSelection();
-    // console.log("onChange: ", root, selection);
-  });
+interface EditorProps {
+  editable?: boolean;
+  onChange?: (editorState: EditorState) => void;
+  stringifiedEditorState?: string;
 }
 
-function Editor() {
+function Editor({
+  editable,
+  onChange,
+  stringifiedEditorState,
+}: EditorProps): JSX.Element {
   const placeholder = <Placeholder>{"请输入内容..."}</Placeholder>;
+  const [editor] = useLexicalComposerContext();
+  if (stringifiedEditorState !== undefined) {
+    const newEditorState = editor.parseEditorState(stringifiedEditorState);
+    editor.setEditorState(newEditorState);
+  }
 
   return (
     <>
       <div className="editor-container">
+        {editable && <ToolbarPlugin />}
+
         <RichTextPlugin
           contentEditable={
             <div className="editor-scroller">
@@ -37,12 +45,13 @@ function Editor() {
           placeholder={placeholder}
           ErrorBoundary={LexicalErrorBoundary}
         />
-        <ToolbarPlugin />
-        <OnChangePlugin onChange={onChange} />
+
+        {onChange && <OnChangePlugin onChange={onChange} />}
+
         <HistoryPlugin />
         <ListPlugin />
         <ImagesPlugin />
-        <AutoFocusPlugin />
+        {editable && <AutoFocusPlugin />}
       </div>
     </>
   );

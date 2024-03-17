@@ -1,11 +1,7 @@
 import { LexicalEditor } from "lexical";
 import DropDown, { DropDownItem } from "../../ui/DropDown";
 import useModal from "../../hooks/useModal";
-import {
-  INSERT_IMAGE_COMMAND,
-  InsertImageDialog,
-  InsertImagePayload,
-} from "../ImagesPlugin";
+import { InsertImageDialog } from "../ImagesPlugin";
 
 interface InsertMediaDropdownProps {
   isEditable: boolean;
@@ -18,22 +14,18 @@ function InsertMediaDropdown({
 }: InsertMediaDropdownProps) {
   const [modal, showModal] = useModal();
 
-  const insertGifOnClick = (payload: InsertImagePayload) => {
-    activeEditor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-  };
-
   return (
     <>
       <DropDown
         disabled={!isEditable}
         buttonClassName="toolbar-item spaced"
-        buttonLabel="Insert"
+        buttonLabel="插入"
         buttonAriaLabel="Insert specialized editor node"
         buttonIconClassName="icon plus"
       >
         <DropDownItem
           onClick={() => {
-            showModal("Insert Image", (onClose) => (
+            showModal("插入图片", (onClose) => (
               <InsertImageDialog
                 activeEditor={activeEditor}
                 onClose={onClose}
@@ -43,19 +35,7 @@ function InsertMediaDropdown({
           className="item"
         >
           <i className="icon image" />
-          <span className="text">Image</span>
-        </DropDownItem>
-        <DropDownItem
-          onClick={() =>
-            insertGifOnClick({
-              altText: "Cat typing on a laptop",
-              src: "/images/gif/cat-typing.gif",
-            })
-          }
-          className="item"
-        >
-          <i className="icon gif" />
-          <span className="text">GIF</span>
+          <span className="text">图片</span>
         </DropDownItem>
       </DropDown>
       {modal}

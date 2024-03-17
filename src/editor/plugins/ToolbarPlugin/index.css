@@ -9,7 +9,7 @@
   overflow: auto;
   height: 36px;
   position: sticky;
-  bottom: 0;
+  top: 0;
   z-index: 2;
 }
 

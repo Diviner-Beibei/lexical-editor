@@ -69,6 +69,11 @@ function ToolbarPlugin(): JSX.Element {
         editor={editor}
       />
       <Divider />
+      <InsertMediaDropdown
+        isEditable={isEditable}
+        activeEditor={activeEditor}
+      />
+      <Divider />
 
       <TextFormatControls
         activeEditor={activeEditor}
@@ -96,11 +101,6 @@ function ToolbarPlugin(): JSX.Element {
         color={bgColor}
         onChange={onBgColorSelect}
         title="bg color"
-      />
-      <Divider />
-      <InsertMediaDropdown
-        isEditable={isEditable}
-        activeEditor={activeEditor}
       />
 
       <Divider />

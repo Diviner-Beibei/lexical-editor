@@ -87,42 +87,42 @@ function BlockFormatDropDown({
         onClick={formatParagraph}
       >
         <i className="icon paragraph" />
-        <span className="text">Normal</span>
+        <span className="text">标准</span>
       </DropDownItem>
       <DropDownItem
         className={"item " + dropDownActiveClass(blockType === "h1")}
         onClick={() => formatHeading("h1")}
       >
         <i className="icon h1" />
-        <span className="text">Heading 1</span>
+        <span className="text">标题 1</span>
       </DropDownItem>
       <DropDownItem
         className={"item " + dropDownActiveClass(blockType === "h2")}
         onClick={() => formatHeading("h2")}
       >
         <i className="icon h2" />
-        <span className="text">Heading 2</span>
+        <span className="text">标题 2</span>
       </DropDownItem>
       <DropDownItem
         className={"item " + dropDownActiveClass(blockType === "h3")}
         onClick={() => formatHeading("h3")}
       >
         <i className="icon h3" />
-        <span className="text">Heading 3</span>
+        <span className="text">标题 3</span>
       </DropDownItem>
       <DropDownItem
         className={"item " + dropDownActiveClass(blockType === "bullet")}
         onClick={formatBulletList}
       >
         <i className="icon bullet-list" />
-        <span className="text">Bullet List</span>
+        <span className="text">无序列表</span>
       </DropDownItem>
       <DropDownItem
         className={"item " + dropDownActiveClass(blockType === "number")}
         onClick={formatNumberedList}
       >
         <i className="icon numbered-list" />
-        <span className="text">Numbered List</span>
+        <span className="text">有序列表</span>
       </DropDownItem>
 
       <DropDownItem
@@ -130,7 +130,7 @@ function BlockFormatDropDown({
         onClick={formatQuote}
       >
         <i className="icon quote" />
-        <span className="text">Quote</span>
+        <span className="text">引用</span>
       </DropDownItem>
     </DropDown>
   );

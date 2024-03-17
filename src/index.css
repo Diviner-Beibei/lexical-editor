@@ -1,6 +1,6 @@
-@import "https://fonts.googleapis.com/css?family=Reenie+Beanie";
+/* @import "https://fonts.googleapis.com/css?family=Reenie+Beanie"; */
 
-body {
+/* body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, ".SFNSText-Regular",
     sans-serif;
@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #eee;
   padding: 0 20px;
-}
+} */
 
 /***********************
   * Editor
@@ -17,7 +17,7 @@ body {
 .editor-shell {
   margin: 20px auto;
   border-radius: 2px;
-  max-width: 1100px;
+  max-width: 100%;
   color: #000;
   position: relative;
   line-height: 1.7;
@@ -73,75 +73,75 @@ body {
    image
   **********************/
 i.undo {
-  background-image: url(images/icons/arrow-counterclockwise.svg);
+  background-image: url(/images/icons/arrow-counterclockwise.svg);
 }
 
 i.redo {
-  background-image: url(images/icons/arrow-clockwise.svg);
+  background-image: url(/images/icons/arrow-clockwise.svg);
 }
 
 i.bold {
-  background-image: url(images/icons/type-bold.svg);
+  background-image: url(/images/icons/type-bold.svg);
 }
 
 i.italic {
-  background-image: url(images/icons/type-italic.svg);
+  background-image: url(/images/icons/type-italic.svg);
 }
 
 i.clear {
-  background-image: url(images/icons/trash.svg);
+  background-image: url(/images/icons/trash.svg);
 }
 
 i.underline {
-  background-image: url(images/icons/type-underline.svg);
+  background-image: url(/images/icons/type-underline.svg);
 }
 
 i.link {
-  background-image: url(images/icons/link.svg);
+  background-image: url(/images/icons/link.svg);
 }
 
 .icon.font-color {
-  background-image: url(images/icons/font-color.svg);
+  background-image: url(/images/icons/font-color.svg);
 }
 
 .icon.bg-color {
-  background-image: url(images/icons/bg-color.svg);
+  background-image: url(/images/icons/bg-color.svg);
 }
 
 .icon.plus {
-  background-image: url(images/icons/plus.svg);
+  background-image: url(/images/icons/plus.svg);
 }
 
 .icon.left-align,
 i.left-align {
-  background-image: url(images/icons/text-left.svg);
+  background-image: url(/images/icons/text-left.svg);
 }
 
 .icon.center-align,
 i.center-align {
-  background-image: url(images/icons/text-center.svg);
+  background-image: url(/images/icons/text-center.svg);
 }
 
 .icon.right-align,
 i.right-align {
-  background-image: url(images/icons/text-right.svg);
+  background-image: url(/images/icons/text-right.svg);
 }
 
 .icon.justify-align,
 i.justify-align {
-  background-image: url(images/icons/justify.svg);
+  background-image: url(/images/icons/justify.svg);
 }
 
 i.indent {
-  background-image: url(images/icons/indent.svg);
+  background-image: url(/images/icons/indent.svg);
 }
 
 i.outdent {
-  background-image: url(images/icons/outdent.svg);
+  background-image: url(/images/icons/outdent.svg);
 }
 
 .icon.paragraph {
-  background-image: url(images/icons/text-paragraph.svg);
+  background-image: url(/images/icons/text-paragraph.svg);
 }
 
 .icon.h1 {
@@ -149,45 +149,45 @@ i.outdent {
 }
 
 .icon.h2 {
-  background-image: url(images/icons/type-h2.svg);
+  background-image: url(/images/icons/type-h2.svg);
 }
 
 .icon.h3 {
-  background-image: url(images/icons/type-h3.svg);
+  background-image: url(/images/icons/type-h3.svg);
 }
 
 .icon.h4 {
-  background-image: url(images/icons/type-h4.svg);
+  background-image: url(/images/icons/type-h4.svg);
 }
 
 .icon.h5 {
-  background-image: url(images/icons/type-h5.svg);
+  background-image: url(/images/icons/type-h5.svg);
 }
 
 .icon.h6 {
-  background-image: url(images/icons/type-h6.svg);
+  background-image: url(/images/icons/type-h6.svg);
 }
 
 .icon.bullet-list,
 .icon.bullet {
-  background-image: url(images/icons/list-ul.svg);
+  background-image: url(/images/icons/list-ul.svg);
 }
 
 .icon.numbered-list,
 .icon.number {
-  background-image: url(images/icons/list-ol.svg);
+  background-image: url(/images/icons/list-ol.svg);
 }
 
 .icon.quote {
-  background-image: url(images/icons/chat-square-quote.svg);
+  background-image: url(/images/icons/chat-square-quote.svg);
 }
 
 i.image {
-  background-image: url(images/icons/file-image.svg);
+  background-image: url(/images/icons/file-image.svg);
 }
 
 i.gif {
-  background-image: url(images/icons/filetype-gif.svg);
+  background-image: url(/images/icons/filetype-gif.svg);
 }
 
 i.chevron-down {
@@ -196,7 +196,7 @@ i.chevron-down {
   display: inline-block;
   height: 8px;
   width: 8px;
-  background-image: url(images/icons/chevron-down.svg);
+  background-image: url(/images/icons/chevron-down.svg);
 }
 
 /***********************
@@ -349,7 +349,7 @@ i.chevron-down {
 }
 
 .link-editor div.link-edit {
-  background-image: url(images/icons/pencil-fill.svg);
+  background-image: url(/images/icons/pencil-fill.svg);
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -363,7 +363,7 @@ i.chevron-down {
 }
 
 .link-editor div.link-trash {
-  background-image: url(images/icons/trash.svg);
+  background-image: url(/images/icons/trash.svg);
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -377,7 +377,7 @@ i.chevron-down {
 }
 
 .link-editor div.link-cancel {
-  background-image: url(images/icons/close.svg);
+  background-image: url(/images/icons/close.svg);
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -392,7 +392,7 @@ i.chevron-down {
 }
 
 .link-editor div.link-confirm {
-  background-image: url(images/icons/success-alt.svg);
+  background-image: url(/images/icons/success-alt.svg);
   background-size: 16px;
   background-position: center;
   background-repeat: no-repeat;

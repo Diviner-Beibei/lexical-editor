@@ -3,16 +3,16 @@ import { ElementFormatType } from "lexical";
 export const blockTypeToBlockName = {
   check: "Check List",
   code: "Code Block",
-  h1: "Heading 1",
-  h2: "Heading 2",
-  h3: "Heading 3",
+  h1: "标题 1",
+  h2: "标题 2",
+  h3: "标题 3",
   h4: "Heading 4",
   h5: "Heading 5",
   h6: "Heading 6",
-  bullet: "Bulleted List",
-  number: "Numbered List",
-  paragraph: "Normal",
-  quote: "Quote",
+  bullet: "无序列表",
+  number: "有序列表",
+  paragraph: "标准",
+  quote: "引用",
 };
 
 export const rootTypeToRootName = {
@@ -30,32 +30,32 @@ export const ELEMENT_FORMAT_OPTIONS: {
   center: {
     icon: "center-align",
     iconRTL: "center-align",
-    name: "Center Align",
+    name: "居中对齐",
   },
   end: {
     icon: "right-align",
     iconRTL: "left-align",
-    name: "End Align",
+    name: "结尾对齐",
   },
   justify: {
     icon: "justify-align",
     iconRTL: "justify-align",
-    name: "Justify Align",
+    name: "两端对齐",
   },
   left: {
     icon: "left-align",
     iconRTL: "left-align",
-    name: "Left Align",
+    name: "左对齐",
   },
   right: {
     icon: "right-align",
     iconRTL: "left-align",
-    name: "Right Align",
+    name: "右对齐",
   },
   start: {
     icon: "left-align",
     iconRTL: "right-align",
-    name: "Start Align",
+    name: "开始对齐",
   },
 };
 
