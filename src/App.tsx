@@ -28,7 +28,7 @@ function App({ editable, onChange, stringifiedEditorState }: AppProps) {
   return (
     <EditorProvider>
       <LexicalComposer initialConfig={initialConfig}>
-        <div className="editor-shell">
+        <div className="editor-shell" data-testid="editor">
           <Editor
             onChange={onChange}
             editable={editable}

@@ -1,6 +1,6 @@
 {
   "name": "beibei-lexical-editor",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A text editor developed using lexical",
   "type": "module",
   "author": "Pan Beibei",
@@ -44,10 +44,10 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts"
+  "types": "dist/types/index.d.ts"
 }

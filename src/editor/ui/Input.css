@@ -12,11 +12,13 @@
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
+  gap: 1rem;
 }
 .Input__label {
   display: flex;
-  flex: 1;
+  /* flex: 1; */
   color: #666;
+  font-size: 1.8rem;
 }
 .Input__input {
   display: flex;
@@ -26,7 +28,7 @@
   padding-bottom: 7px;
   padding-left: 10px;
   padding-right: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 5px;
   min-width: 0;
 }

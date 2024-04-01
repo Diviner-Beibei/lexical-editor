@@ -2,7 +2,7 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import dts from "rollup-plugin-dts";
+// import dts from "rollup-plugin-dts";
 
 import postcss from "rollup-plugin-postcss";
 // import postcssModules from 'postcss-modules';
@@ -15,14 +15,15 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 export default [
   {
     input: 'src/index.ts', // 你的入口文件
+    inlineDynamicImports: true,
     output: [
-      // {
-      //   dir: "dist/cjs",
-      //   format: "cjs",
-      //   sourcemap: true,
-      // },
       {
-        dir: "dist",
+        file: "dist/index.cjs.js",
+        format: "cjs",
+        sourcemap: true,
+      },
+      {
+        file: "dist/index.esm.js",
         format: "esm",
         sourcemap: true,
       },
@@ -32,6 +33,8 @@ export default [
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
+        declaration: true,
+        declarationDir: "dist/types",
       }),
 
       // image(),
@@ -41,20 +44,7 @@ export default [
       postcss(),
       terser(),
       peerDepsExternal(),
-      // copy({
-      //   targets: [
-      //     { src: 'public/*', dest: 'dist' },
-      //   ]
-      // }), // 复制public下的文件到dist下
     ],
     external: ['react', 'react-dom'], // 添加在这里
-  },
-
-  {
-    input: "dist/types/index.d.ts",
-    output: [{ file: "dist/index.d.ts", format: "esm" }],
-    plugins: [dts()],
-
-    external: [/\.css$/],
   },
 ];
